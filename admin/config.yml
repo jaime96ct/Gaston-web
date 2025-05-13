@@ -1,1 +1,15 @@
+backend:
+  name: git-gateway
+  branch: main  # Cambia a 'master' si es tu rama principal
 
+media_folder: "imagenes/uploads"  # Carpeta donde subir imágenes
+public_folder: "/imagenes/uploads"
+
+collections:
+  - name: "paginas"
+    label: "Páginas"
+    folder: "contenido"  # Carpeta donde se guardarán los cambios
+    create: true
+    fields:
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Contenido", name: "contenido", widget: "markdown" }

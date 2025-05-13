@@ -1,15 +1,55 @@
 backend:
   name: git-gateway
-  branch: main  # Cambia a 'master' si es tu rama principal
+  branch: main
 
-media_folder: "imagenes/uploads"  # Carpeta donde subir imágenes
-public_folder: "/imagenes/uploads"
+media_folder: "imagenes"  # Carpeta donde se suben imágenes
+public_folder: "/imagenes"  # Ruta pública de imágenes
 
 collections:
-  - name: "paginas"
-    label: "Páginas"
-    folder: "contenido"  # Carpeta donde se guardarán los cambios
+  # Editar la página principal (index.html)
+  - name: "pagina_principal"
+    label: "Página Principal"
+    files:
+      - name: "inicio"
+        label: "Contenido Principal"
+        file: "otraopcion.html"  # Ruta al archivo HTML
+        fields:
+          # Hero Section
+          - { name: "titulo_hero", label: "Título Hero (h1)", widget: "string", required: false }
+          - { name: "texto_boton_hero", label: "Texto Botón Hero", widget: "string" }
+          
+          # Sobre Nosotros
+          - { name: "titulo_sobre_nosotros", label: "Título 'Sobre Nosotros'", widget: "string" }
+          - { name: "texto_sobre_nosotros", label: "Texto 'Sobre Nosotros'", widget: "markdown" }
+          - { name: "texto_imagen_sobre", label: "Texto sobre imagen (¡Te invito...)", widget: "text" }
+
+          # Aquagym
+          - { name: "titulo_aquagym", label: "Título Aquagym", widget: "string" }
+          - { name: "descripcion_aquagym", label: "Descripción Aquagym", widget: "markdown" }
+          - { name: "horarios_aquagym", label: "Horarios Aquagym", widget: "markdown" }
+          - { name: "texto_fijo_aquagym", label: "Texto fijo Aquagym", widget: "text" }
+
+          # Matronatación
+          - { name: "titulo_matronatacion", label: "Título Matronatación", widget: "string" }
+          - { name: "descripcion_matronatacion", label: "Descripción Matronatación", widget: "markdown" }
+          - { name: "texto_fijo_matronatacion", label: "Texto fijo Matronatación", widget: "text" }
+
+          # Natación
+          - { name: "titulo_natacion", label: "Título Natación", widget: "string" }
+          - { name: "descripcion_natacion", label: "Descripción Natación", widget: "markdown" }
+          - { name: "texto_fijo_natacion", label: "Texto fijo Natación", widget: "text" }
+
+          # Contacto
+          - { name: "telefono_contacto", label: "Teléfono de Contacto", widget: "string" }
+          - { name: "email_contacto", label: "Email de Contacto", widget: "string" }
+          - { name: "direccion_contacto", label: "Dirección", widget: "text" }
+
+  # Colección para textos repetibles (ej: beneficios)
+  - name: "beneficios"
+    label: "Beneficios"
+    folder: "data/beneficios"  # Crear esta carpeta
     create: true
     fields:
-      - { label: "Título", name: "titulo", widget: "string" }
-      - { label: "Contenido", name: "contenido", widget: "markdown" }
+      - { name: "titulo", label: "Título Beneficio", widget: "string" }
+      - { name: "descripcion", label: "Descripción", widget: "text" }
+      - { name: "icono", label: "Icono (FontAwesome)", widget: "string" }

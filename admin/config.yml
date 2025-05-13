@@ -53,3 +53,30 @@ collections:
       - { name: "titulo", label: "Título Beneficio", widget: "string" }
       - { name: "descripcion", label: "Descripción", widget: "text" }
       - { name: "icono", label: "Icono (FontAwesome)", widget: "string" }
+  # Galería de Aquagym (imágenes + vídeos)
+  - name: "aquagym"
+    label: "Aquagym - Galería"
+    description: "Sube o elimina imágenes/vídeos para la galería de Aquagym"
+    folder: "imagenes/Aquagym"  # Ruta donde se guardarán
+    create: true  # Permite crear nuevos archivos
+    allow_media_large: true  # Permite vídeos pesados
+    fields:
+      - { name: "body", label: "Archivo", widget: "image", allow_multiple: true }
+
+  # Galería de Matronatación
+  - name: "matronatacion"
+    label: "Matronatación - Galería"
+    folder: "imagenes/matronatacion"
+    create: true
+    allow_media_large: true
+    fields:
+      - { name: "body", label: "Archivo", widget: "image", allow_multiple: true }
+
+  # Galería de Natación
+  - name: "natacion"
+    label: "Natación - Galería"
+    folder: "imagenes/natacion"
+    create: true
+    allow_media_large: true
+    fields:
+      - { name: "body", label: "Archivo", widget: "image", allow_multiple: true }

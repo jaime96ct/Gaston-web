@@ -1,82 +1,232 @@
 backend:
   name: git-gateway
   branch: main
-
-media_folder: "imagenes"  # Carpeta donde se suben imágenes
-public_folder: "/imagenes"  # Ruta pública de imágenes
+media_folder: "imagenes"
+public_folder: "/imagenes"
+publish_mode: editorial_workflow
 
 collections:
-  # Editar la página principal (index.html)
   - name: "pagina_principal"
     label: "Página Principal"
+    editor:
+      preview: false
     files:
       - name: "inicio"
         label: "Contenido Principal"
-        file: "../index.html"  # Ruta al archivo HTML
+        file: "../index.html"
         fields:
-          # Hero Section
-          - { name: "titulo_hero", label: "Título Hero (h1)", widget: "string", required: false }
-          - { name: "texto_boton_hero", label: "Texto Botón Hero", widget: "string" }
-          
-          # Sobre Nosotros
-          - { name: "titulo_sobre_nosotros", label: "Título 'Sobre Nosotros'", widget: "string" }
-          - { name: "texto_sobre_nosotros", label: "Texto 'Sobre Nosotros'", widget: "markdown" }
-          - { name: "texto_imagen_sobre", label: "Texto sobre imagen (¡Te invito...)", widget: "text" }
+          # -------------------------------
+          # 1. Hero Section
+          # -------------------------------
+          - label: "Hero Banner"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { name: "titulo", label: "Título Principal", widget: "string", required: false }
+              - { name: "texto_boton", label: "Texto Botón Principal", widget: "string" }
+              - { name: "texto_boton_whatsapp", label: "Texto Botón WhatsApp", widget: "string" }
 
-          # Aquagym
-          - { name: "titulo_aquagym", label: "Título Aquagym", widget: "string" }
-          - { name: "descripcion_aquagym", label: "Descripción Aquagym", widget: "markdown" }
-          - { name: "horarios_aquagym", label: "Horarios Aquagym", widget: "markdown" }
-          - { name: "texto_fijo_aquagym", label: "Texto fijo Aquagym", widget: "text" }
+          # -------------------------------
+          # 2. Sobre Nosotros
+          # -------------------------------
+          - label: "Sobre Nosotros"
+            name: "sobre_nosotros"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              - { name: "texto_principal", label: "Texto Principal", widget: "markdown" }
+              - { name: "texto_imagen", label: "Texto sobre Imagen", widget: "text" }
+              
+              - label: "Objetivos"
+                name: "objetivos"
+                widget: "list"
+                field: { label: "Objetivo", name: "item", widget: "text" }
+              
+              - label: "Ubicación"
+                name: "ubicacion"
+                widget: "object"
+                fields:
+                  - { name: "direccion", label: "Dirección", widget: "string" }
+                  - { name: "horario", label: "Horario", widget: "string" }
+                  - { name: "telefono", label: "Teléfono", widget: "string" }
+                  - { name: "email", label: "Email", widget: "string" }
 
-          # Matronatación
-          - { name: "titulo_matronatacion", label: "Título Matronatación", widget: "string" }
-          - { name: "descripcion_matronatacion", label: "Descripción Matronatación", widget: "markdown" }
-          - { name: "texto_fijo_matronatacion", label: "Texto fijo Matronatación", widget: "text" }
+          # -------------------------------
+          # 3. Aquagym
+          # -------------------------------
+          - label: "Aquagym"
+            name: "aquagym"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              - { name: "descripcion", label: "Descripción", widget: "markdown" }
+              - { name: "texto_fijo", label: "Texto Destacado", widget: "text" }
+              
+              - label: "Beneficios"
+                name: "beneficios"
+                widget: "list"
+                field: { label: "Beneficio", name: "item", widget: "text" }
+              
+              - label: "Horarios"
+                name: "horarios"
+                widget: "object"
+                fields:
+                  - { name: "verano", label: "Horario Verano", widget: "markdown" }
+                  - { name: "invierno", label: "Horario Invierno", widget: "markdown" }
 
-          # Natación
-          - { name: "titulo_natacion", label: "Título Natación", widget: "string" }
-          - { name: "descripcion_natacion", label: "Descripción Natación", widget: "markdown" }
-          - { name: "texto_fijo_natacion", label: "Texto fijo Natación", widget: "text" }
+          # -------------------------------
+          # 4. Matronatación
+          # -------------------------------
+          - label: "Matronatación"
+            name: "matronatacion"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              - { name: "descripcion", label: "Descripción", widget: "markdown" }
+              - { name: "texto_fijo", label: "Texto Destacado", widget: "text" }
+              
+              - label: "Beneficios"
+                name: "beneficios"
+                widget: "list"
+                field: { label: "Beneficio", name: "item", widget: "text" }
+              
+              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown" }
 
-          # Contacto
-          - { name: "telefono_contacto", label: "Teléfono de Contacto", widget: "string" }
-          - { name: "email_contacto", label: "Email de Contacto", widget: "string" }
-          - { name: "direccion_contacto", label: "Dirección", widget: "text" }
+          # -------------------------------
+          # 5. Natación
+          # -------------------------------
+          - label: "Natación"
+            name: "natacion"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              - { name: "descripcion", label: "Descripción", widget: "markdown" }
+              - { name: "texto_fijo", label: "Texto Destacado", widget: "text" }
+              
+              - label: "Beneficios"
+                name: "beneficios"
+                widget: "list"
+                field: { label: "Beneficio", name: "item", widget: "text" }
+              
+              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown" }
 
-  # Colección para textos repetibles (ej: beneficios)
-  - name: "beneficios"
-    label: "Beneficios"
-    folder: "data/beneficios"  # Crear esta carpeta
-    create: true
-    fields:
-      - { name: "titulo", label: "Título Beneficio", widget: "string" }
-      - { name: "descripcion", label: "Descripción", widget: "text" }
-      - { name: "icono", label: "Icono (FontAwesome)", widget: "string" }
+          # -------------------------------
+          # 6. Clases Privadas
+          # -------------------------------
+          - label: "Clases Privadas"
+            name: "clases_privadas"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              - { name: "descripcion", label: "Descripción", widget: "markdown" }
+              
+              - label: "Ventajas"
+                name: "ventajas"
+                widget: "list"
+                field: { label: "Ventaja", name: "item", widget: "string" }
+              
+              - { name: "texto_boton", label: "Texto Botón Reserva", widget: "string" }
+
+          # -------------------------------
+          # 7. Contacto
+          # -------------------------------
+          - label: "Contacto"
+            name: "contacto"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              
+              - label: "Información de Contacto"
+                name: "info_contacto"
+                widget: "object"
+                fields:
+                  - { name: "telefono", label: "Teléfono", widget: "string" }
+                  - { name: "email", label: "Email", widget: "string" }
+                  - { name: "direccion_verano", label: "Dirección (Verano)", widget: "text" }
+                  - { name: "direccion_invierno", label: "Dirección (Invierno)", widget: "text" }
+                  - { name: "instagram", label: "Usuario Instagram", widget: "string" }
+              
+              - label: "Formulario"
+                name: "formulario"
+                widget: "object"
+                fields:
+                  - { name: "email_destino", label: "Email Destino Formulario", widget: "string" }
+                  - { name: "texto_boton", label: "Texto Botón Enviar", widget: "string" }
+
+          # -------------------------------
+          # 8. Footer
+          # -------------------------------
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "copyright", label: "Texto Copyright", widget: "string" }
+              - { name: "instagram", label: "Usuario Instagram Footer", widget: "string" }
+
+# Configuración mejorada para galerías (añadir al config.yml existente)
+collections:
+  # ... (tus otras colecciones aquí)
+
   # Galería de Aquagym (imágenes + vídeos)
-  - name: "aquagym"
+  - name: "galeria_aquagym"
     label: "Aquagym - Galería"
-    description: "Sube o elimina imágenes/vídeos para la galería de Aquagym"
-    folder: "imagenes/Aquagym"  # Ruta donde se guardarán
-    create: true  # Permite crear nuevos archivos
-    allow_media_large: true  # Permite vídeos pesados
+    description: "Gestiona imágenes/vídeos de Aquagym (arrastra para reordenar)"
+    folder: "imagenes/Aquagym"
+    create: true
+    delete: true  # Permite eliminar archivos
+    editor:
+      preview: false  # Mejor rendimiento para medios
     fields:
-      - { name: "body", label: "Archivo", widget: "image", allow_multiple: true }
+      - name: "tipo"
+        label: "Tipo de archivo"
+        widget: "select"
+        options: ["Imagen", "Video"]
+        default: "Imagen"
+      - name: "archivo"
+        label: "Archivo"
+        widget: "file"
+        media_library: 
+          allow_multiple: true  # Permite subir varios a la vez
+      - name: "descripcion"
+        label: "Descripción (para SEO)"
+        widget: "string"
+        required: false
+      - name: "orden"
+        label: "Orden (1-100)"
+        widget: "number"
+        default: 50
 
-  # Galería de Matronatación
-  - name: "matronatacion"
+  # Galería de Matronatación (misma estructura)
+  - name: "galeria_matronatacion"
     label: "Matronatación - Galería"
     folder: "imagenes/matronatacion"
     create: true
-    allow_media_large: true
-    fields:
-      - { name: "body", label: "Archivo", widget: "image", allow_multiple: true }
+    delete: true
+    editor:
+      preview: false
+    fields:  # Los mismos campos que Aquagym
+      - { name: "tipo", label: "Tipo", widget: "select", options: ["Imagen", "Video"], default: "Imagen" }
+      - { name: "archivo", label: "Archivo", widget: "file" }
+      - { name: "descripcion", label: "Descripción", widget: "string", required: false }
+      - { name: "orden", label: "Orden", widget: "number", default: 50 }
 
-  # Galería de Natación
-  - name: "natacion"
+  # Galería de Natación (misma estructura)
+  - name: "galeria_natacion"
     label: "Natación - Galería"
     folder: "imagenes/natacion"
     create: true
-    allow_media_large: true
-    fields:
-      - { name: "body", label: "Archivo", widget: "image", allow_multiple: true }
+    delete: true
+    editor:
+      preview: false
+    fields:  # Los mismos campos que Aquagym
+      - { name: "tipo", label: "Tipo", widget: "select", options: ["Imagen", "Video"], default: "Imagen" }
+      - { name: "archivo", label: "Archivo", widget: "file" }
+      - { name: "descripcion", label: "Descripción", widget: "string", required: false }
+      - { name: "orden", label: "Orden", widget: "number", default: 50 }

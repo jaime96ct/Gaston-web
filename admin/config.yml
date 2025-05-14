@@ -12,7 +12,7 @@ collections:
     files:
       - name: "inicio"
         label: "Contenido Principal"
-        file: "index.html"  # Ruta al archivo HTML
+        file: "../index.html"  # Ruta al archivo HTML
         fields:
           # Hero Section
           - { name: "titulo_hero", label: "Título Hero (h1)", widget: "string", required: false }

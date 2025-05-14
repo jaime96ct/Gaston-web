@@ -466,46 +466,47 @@
  // --- START MANUS MODIFIED MENU LOGIC (Replaces original menu toggle code) ---
  document.addEventListener("DOMContentLoaded", function() {
   const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links"); 
-  const dropdownLiElements = document.querySelectorAll("li.dropdown"); 
+  const navLinks = document.querySelector(".nav-links");
+  const dropdownLiElements = document.querySelectorAll("li.dropdown");
 
+  // Hamburger menu toggle
   if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", function(event) {
-      event.stopPropagation(); 
-      navLinks.classList.toggle("active"); 
-      document.body.classList.toggle("menu-open"); 
+      event.stopPropagation();
+      navLinks.classList.toggle("active");
+      document.body.classList.toggle("menu-open");
     });
   }
 
-  dropdownLiElements.forEach(dropdownLi => { 
-    const mainDropdownLink = dropdownLi.querySelector("a"); 
-    
-    if (mainDropdownLink && mainDropdownLink.parentElement === dropdownLi) {
-        mainDropdownLink.addEventListener("click", function(event) {
-            if (window.innerWidth <= 768) { 
-                if (dropdownLi.querySelector(".dropdown-menu")) { 
-                    event.preventDefault(); 
-                    dropdownLi.classList.toggle("active"); 
-                    dropdownLiElements.forEach(otherDropdownLi => {
-                        if (otherDropdownLi !== dropdownLi && otherDropdownLi.classList.contains("active")) {
-                            otherDropdownLi.classList.remove("active");
-                        }
-                    });
-                }
-            }
-        });
-    }
-  });
-
-  const allNavSiteLinks = document.querySelectorAll(".nav-links a"); 
+  const allNavSiteLinks = document.querySelectorAll(".nav-links a");
 
   allNavSiteLinks.forEach(navLink => {
     navLink.addEventListener("click", function(event) {
       const href = this.getAttribute("href");
       const isInternalPageLink = href && href.startsWith("#") && href.length > 1;
+      const isMobile = window.innerWidth <= 768;
 
+      const parentLi = this.closest("li.dropdown");
+      const hasSubmenu = parentLi && parentLi.querySelector(".dropdown-menu");
+      const isDirectDropdownLink = parentLi && parentLi.querySelector("a") === this;
+
+      if (isMobile && isDirectDropdownLink && hasSubmenu) {
+        // On mobile, if a dropdown parent link with a submenu is clicked:
+        event.preventDefault(); // Prevent navigation
+        parentLi.classList.toggle("active"); // Toggle its submenu
+
+        // Close other open submenus
+        dropdownLiElements.forEach(otherDropdownLi => {
+          if (otherDropdownLi !== parentLi && otherDropdownLi.classList.contains("active")) {
+            otherDropdownLi.classList.remove("active");
+          }
+        });
+        return; // Stop further processing for this click, submenu is now open/closed, main menu stays open.
+      }
+
+      // For all other cases (direct links, submenu item clicks, or desktop view):
       if (isInternalPageLink) {
-        event.preventDefault(); 
+        event.preventDefault();
         const targetElement = document.querySelector(href);
         if (targetElement) {
           const header = document.querySelector("header");
@@ -520,26 +521,27 @@
         }
       }
 
+      // Close main hamburger menu (if active)
       if (navLinks && navLinks.classList.contains("active")) {
         navLinks.classList.remove("active");
         if (document.body.classList.contains("menu-open")) {
-            document.body.classList.remove("menu-open");
+          document.body.classList.remove("menu-open");
         }
       }
 
-      const parentDropdownLi = this.closest("li.dropdown");
-      if (parentDropdownLi && parentDropdownLi.classList.contains("active")) {
-         parentDropdownLi.classList.remove("active");
+      // Close parent dropdown (if one exists and was active, or just ensure it's closed)
+      if (parentLi) {
+        parentLi.classList.remove("active");
+        if (window.innerWidth > 768) { // Desktop specific blur for hover effect
+            const mainLinkOfParent = parentLi.querySelector("a");
+            if (mainLinkOfParent && mainLinkOfParent.parentElement === parentLi) {
+                mainLinkOfParent.blur();
+            }
+        }
       }
-      if (parentDropdownLi && window.innerWidth > 768) {
-          const mainLinkOfParent = parentDropdownLi.querySelector("a");
-          if (mainLinkOfParent && mainLinkOfParent.parentElement === parentDropdownLi) {
-              mainLinkOfParent.blur();
-          }
-          parentDropdownLi.classList.remove("active"); 
-      }
-      
-      if (window.innerWidth <= 768) {
+
+      // On mobile, after any navigation-inducing click (e.g. from a submenu item), ensure ALL submenus are closed.
+      if (isMobile) {
         dropdownLiElements.forEach(d => {
             d.classList.remove("active");
         });
@@ -547,6 +549,7 @@
     });
   });
 
+  // Click outside to close menu and submenus
   document.addEventListener("click", function(event) {
     const isClickInsideNavContainer = navLinks && navLinks.contains(event.target);
     const isClickOnToggle = menuToggle && menuToggle.contains(event.target);
@@ -555,9 +558,10 @@
       if (navLinks && navLinks.classList.contains("active")) {
         navLinks.classList.remove("active");
         if (document.body.classList.contains("menu-open")) {
-            document.body.classList.remove("menu-open");
+          document.body.classList.remove("menu-open");
         }
       }
+      // Also close all submenus if clicked outside
       dropdownLiElements.forEach(dropdownLi => {
         dropdownLi.classList.remove("active");
       });
@@ -565,3 +569,4 @@
   });
 });
 // --- END MANUS MODIFIED MENU LOGIC ---
+

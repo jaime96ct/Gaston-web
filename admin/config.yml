@@ -31,30 +31,57 @@ collections:
           # -------------------------------
           # 2. Sobre Nosotros
           # -------------------------------
-          - label: "Sobre Nosotros"
-            name: "sobre_nosotros"
-            widget: "object"
-            required: false
-            fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
-              - { name: "texto_principal", label: "Texto Principal", widget: "markdown", required: false }
-              - { name: "texto_imagen", label: "Texto sobre Imagen", widget: "text", required: false }
-              
-              - label: "Objetivos"
-                name: "objetivos"
-                widget: "list"
-                required: false
-                field: { label: "Objetivo", name: "item", widget: "text", required: false }
-              
-              - label: "Ubicación"
-                name: "ubicacion"
-                widget: "object"
-                required: false
-                fields:
-                  - { name: "direccion", label: "Dirección", widget: "string", required: false }
-                  - { name: "horario", label: "Horario", widget: "string", required: false }
-                  - { name: "telefono", label: "Teléfono", widget: "string", required: false }
-                  - { name: "email", label: "Email", widget: "string", required: false }
+        
+  - name: "sobre"
+    label: "Sección Sobre Nosotros"
+    folder: "cms/sobre"
+    create: false
+    slug: "contenido"
+    fields:
+      - label: "Título de la sección"
+        name: "titulo_seccion"
+        widget: "string"
+        default: "Sobre nosotros"
+
+      - label: "Texto sobre la imagen"
+        name: "texto_imagen"
+        widget: "text"
+        default: "¡Te invito a sumarte a esta experiencia donde el agua se convierte en bienestar, salud y alegría!"
+
+      - label: "Texto principal - Nuestro Club"
+        name: "texto_principal"
+        widget: "markdown"
+
+      - label: "Título - Objetivos"
+        name: "titulo_objetivos"
+        widget: "string"
+        default: "Nuestros Objetivos"
+
+      - label: "Lista de Objetivos"
+        name: "lista_objetivos"
+        widget: "markdown"
+        default: |
+          - **Fomentar un estilo de vida saludable y activo**, promoviendo hábitos que mejoren el bienestar físico y emocional de nuestros alumnos.
+          - **Impulsar la práctica regular de actividad física** adaptada a todas las edades y capacidades.
+          - **Transmitir seguridad y confianza en el medio acuático** creando un entorno seguro, motivador y adaptado al ritmo de cada persona.
+          - **Ofrecer un trato cercano y personalizado** fortaleciendo la relación con nuestros alumnos y sus familias.
+          - **Enseñar desde la pasión y la experiencia**, compartiendo los conocimientos técnicos necesarios para disfrutar del deporte acuático con autonomía y seguridad.
+
+      - label: "Título - ¿Dónde estamos?"
+        name: "titulo_estamos"
+        widget: "string"
+        default: "¿Dónde Estamos?"
+
+      - label: "Lista de Ubicación"
+        name: "lista_estamos"
+        widget: "markdown"
+        default: |
+          - **Dirección:** Albergue Inturjoven Aguadulce en Verano y Hotel Playadulce el resto del año  
+          - **Horario:** Consultar por WhatsApp o E-mail  
+          - **Teléfono:** 659 13 69 87  
+          - **Email:** natacion_aguadulce@outlook.es
+
+
 
           # -------------------------------
           # 3. Aquagym

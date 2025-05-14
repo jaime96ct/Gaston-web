@@ -14,6 +14,7 @@ collections:
       - name: "inicio"
         label: "Contenido Principal"
         file: "../index.html"
+        frontmatter_delimiter: ["<!-- CMS-DATA -->", "<!-- /CMS-DATA -->"]
         fields:
           # -------------------------------
           # 1. Hero Section
@@ -21,10 +22,11 @@ collections:
           - label: "Hero Banner"
             name: "hero"
             widget: "object"
+            required: false
             fields:
               - { name: "titulo", label: "Título Principal", widget: "string", required: false }
-              - { name: "texto_boton", label: "Texto Botón Principal", widget: "string" }
-              - { name: "texto_boton_whatsapp", label: "Texto Botón WhatsApp", widget: "string" }
+              - { name: "texto_boton", label: "Texto Botón Principal", widget: "string", required: false }
+              - { name: "texto_boton_whatsapp", label: "Texto Botón WhatsApp", widget: "string", required: false }
 
           # -------------------------------
           # 2. Sobre Nosotros
@@ -32,25 +34,27 @@ collections:
           - label: "Sobre Nosotros"
             name: "sobre_nosotros"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
-              - { name: "texto_principal", label: "Texto Principal", widget: "markdown" }
-              - { name: "texto_imagen", label: "Texto sobre Imagen", widget: "text" }
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
+              - { name: "texto_principal", label: "Texto Principal", widget: "markdown", required: false }
+              - { name: "texto_imagen", label: "Texto sobre Imagen", widget: "text", required: false }
               
               - label: "Objetivos"
                 name: "objetivos"
                 widget: "list"
-                field: { label: "Objetivo", name: "item", widget: "text" }
+                required: false
+                field: { label: "Objetivo", name: "item", widget: "text", required: false }
               
               - label: "Ubicación"
                 name: "ubicacion"
                 widget: "object"
+                required: false
                 fields:
-                  - { name: "direccion", label: "Dirección", widget: "string" }
-                  - { name: "horario", label: "Horario", widget: "string" }
-                  - { name: "telefono", label: "Teléfono", widget: "string" }
-                  - { name: "email", label: "Email", widget: "string" }
+                  - { name: "direccion", label: "Dirección", widget: "string", required: false }
+                  - { name: "horario", label: "Horario", widget: "string", required: false }
+                  - { name: "telefono", label: "Teléfono", widget: "string", required: false }
+                  - { name: "email", label: "Email", widget: "string", required: false }
 
           # -------------------------------
           # 3. Aquagym
@@ -58,23 +62,25 @@ collections:
           - label: "Aquagym"
             name: "aquagym"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
-              - { name: "descripcion", label: "Descripción", widget: "markdown" }
-              - { name: "texto_fijo", label: "Texto Destacado", widget: "text" }
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
+              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
+              - { name: "texto_fijo", label: "Texto Destacado", widget: "text", required: false }
               
               - label: "Beneficios"
                 name: "beneficios"
                 widget: "list"
-                field: { label: "Beneficio", name: "item", widget: "text" }
+                required: false
+                field: { label: "Beneficio", name: "item", widget: "text", required: false }
               
               - label: "Horarios"
                 name: "horarios"
                 widget: "object"
+                required: false
                 fields:
-                  - { name: "verano", label: "Horario Verano", widget: "markdown" }
-                  - { name: "invierno", label: "Horario Invierno", widget: "markdown" }
+                  - { name: "verano", label: "Horario Verano", widget: "markdown", required: false }
+                  - { name: "invierno", label: "Horario Invierno", widget: "markdown", required: false }
 
           # -------------------------------
           # 4. Matronatación
@@ -82,18 +88,19 @@ collections:
           - label: "Matronatación"
             name: "matronatacion"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
-              - { name: "descripcion", label: "Descripción", widget: "markdown" }
-              - { name: "texto_fijo", label: "Texto Destacado", widget: "text" }
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
+              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
+              - { name: "texto_fijo", label: "Texto Destacado", widget: "text", required: false }
               
               - label: "Beneficios"
                 name: "beneficios"
                 widget: "list"
-                field: { label: "Beneficio", name: "item", widget: "text" }
+                required: false
+                field: { label: "Beneficio", name: "item", widget: "text", required: false }
               
-              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown" }
+              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown", required: false }
 
           # -------------------------------
           # 5. Natación
@@ -101,18 +108,19 @@ collections:
           - label: "Natación"
             name: "natacion"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
-              - { name: "descripcion", label: "Descripción", widget: "markdown" }
-              - { name: "texto_fijo", label: "Texto Destacado", widget: "text" }
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
+              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
+              - { name: "texto_fijo", label: "Texto Destacado", widget: "text", required: false }
               
               - label: "Beneficios"
                 name: "beneficios"
                 widget: "list"
-                field: { label: "Beneficio", name: "item", widget: "text" }
+                required: false
+                field: { label: "Beneficio", name: "item", widget: "text", required: false }
               
-              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown" }
+              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown", required: false }
 
           # -------------------------------
           # 6. Clases Privadas
@@ -120,55 +128,84 @@ collections:
           - label: "Clases Privadas"
             name: "clases_privadas"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
-              - { name: "descripcion", label: "Descripción", widget: "markdown" }
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
+              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
               
               - label: "Ventajas"
                 name: "ventajas"
                 widget: "list"
-                field: { label: "Ventaja", name: "item", widget: "string" }
+                required: false
+                field: { label: "Ventaja", name: "item", widget: "string", required: false }
               
-              - { name: "texto_boton", label: "Texto Botón Reserva", widget: "string" }
+              - { name: "texto_boton", label: "Texto Botón Reserva", widget: "string", required: false }
 
           # -------------------------------
-          # 7. Contacto
+          # 7. Galerías (nuevo)
+          # -------------------------------
+          - label: "Galerías"
+            name: "galerias"
+            widget: "object"
+            required: false
+            fields:
+              - label: "Aquagym"
+                name: "galeria_aquagym"
+                widget: "list"
+                required: false
+                field: { label: "Imagen/Video", name: "media", widget: "file", required: false }
+              
+              - label: "Matronatación"
+                name: "galeria_matronatacion"
+                widget: "list"
+                required: false
+                field: { label: "Imagen/Video", name: "media", widget: "file", required: false }
+              
+              - label: "Natación"
+                name: "galeria_natacion"
+                widget: "list"
+                required: false
+                field: { label: "Imagen/Video", name: "media", widget: "file", required: false }
+
+          # -------------------------------
+          # 8. Contacto
           # -------------------------------
           - label: "Contacto"
             name: "contacto"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string" }
+              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
               
               - label: "Información de Contacto"
                 name: "info_contacto"
                 widget: "object"
+                required: false
                 fields:
-                  - { name: "telefono", label: "Teléfono", widget: "string" }
-                  - { name: "email", label: "Email", widget: "string" }
-                  - { name: "direccion_verano", label: "Dirección (Verano)", widget: "text" }
-                  - { name: "direccion_invierno", label: "Dirección (Invierno)", widget: "text" }
-                  - { name: "instagram", label: "Usuario Instagram", widget: "string" }
+                  - { name: "telefono", label: "Teléfono", widget: "string", required: false }
+                  - { name: "email", label: "Email", widget: "string", required: false }
+                  - { name: "direccion_verano", label: "Dirección (Verano)", widget: "text", required: false }
+                  - { name: "direccion_invierno", label: "Dirección (Invierno)", widget: "text", required: false }
+                  - { name: "instagram", label: "Usuario Instagram", widget: "string", required: false }
               
               - label: "Formulario"
                 name: "formulario"
                 widget: "object"
+                required: false
                 fields:
-                  - { name: "email_destino", label: "Email Destino Formulario", widget: "string" }
-                  - { name: "texto_boton", label: "Texto Botón Enviar", widget: "string" }
+                  - { name: "email_destino", label: "Email Destino Formulario", widget: "string", required: false }
+                  - { name: "texto_boton", label: "Texto Botón Enviar", widget: "string", required: false }
 
           # -------------------------------
-          # 8. Footer
+          # 9. Footer
           # -------------------------------
           - label: "Footer"
             name: "footer"
             widget: "object"
-            collapsed: true
+            required: false
             fields:
-              - { name: "copyright", label: "Texto Copyright", widget: "string" }
-              - { name: "instagram", label: "Usuario Instagram Footer", widget: "string" }
+              - { name: "copyright", label: "Texto Copyright", widget: "string", required: false }
+              - { name: "instagram", label: "Usuario Instagram Footer", widget: "string", required: false }
 
 # Colección para imágenes generales (opcional)
   - name: "imagenes_generales"

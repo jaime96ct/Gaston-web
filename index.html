@@ -6,6 +6,7 @@
       name="description"
       content="Clases de natación, Aquagym y Matronatación en Aguadulce para todas las edades con Gastón Martín Iriart, profesor certificado. Aprende y diviértete en un ambiente seguro."
     />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clases de Natación en Aguadulce | Profesor Gastón Martín Iriart</title>
     <link
@@ -706,5 +707,16 @@ Tanto para pequeños como para adultos, puedes ponerte en contacto con nosotros 
       </div>
     </footer>
     <script src="otraopcion.js"></script>
+    <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
   </body>
 </html>

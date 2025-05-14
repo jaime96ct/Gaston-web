@@ -733,6 +733,18 @@ Tanto para pequeños como para adultos, puedes ponerte en contacto con nosotros 
       }
     });
   }
+  fetch('/cms/sobre/contenido.json')
+    .then(res => res.json())
+    .then(data => {
+      if (data.titulo_seccion) document.getElementById("titulo-seccion").innerText = data.titulo_seccion;
+      if (data.texto_imagen) document.getElementById("texto-imagen").innerHTML = `<b>${data.texto_imagen}</b>`;
+      if (data.texto_principal) document.getElementById("texto-principal").innerHTML = data.texto_principal;
+      if (data.titulo_objetivos) document.getElementById("titulo-objetivos").innerText = data.titulo_objetivos;
+      if (data.lista_objetivos) document.getElementById("lista-objetivos").innerHTML = data.lista_objetivos;
+      if (data.titulo_estamos) document.getElementById("titulo-estamos").innerText = data.titulo_estamos;
+      if (data.lista_estamos) document.getElementById("lista-estamos").innerHTML = data.lista_estamos;
+    })
+    .catch(err => console.error("Error al cargar datos del CMS:", err));
 </script>
   </body>
 </html>

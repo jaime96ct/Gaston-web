@@ -169,59 +169,48 @@ collections:
             fields:
               - { name: "copyright", label: "Texto Copyright", widget: "string" }
               - { name: "instagram", label: "Usuario Instagram Footer", widget: "string" }
-  # Galería de Aquagym (imágenes + vídeos)
-  - name: "galeria_aquagym"
-    label: "Aquagym - Galería"
-    description: "Gestiona imágenes/vídeos de Aquagym (arrastra para reordenar)"
-    folder: "imagenes/Aquagym"
-    create: true
-    delete: true  # Permite eliminar archivos
-    editor:
-      preview: false  # Mejor rendimiento para medios
-    fields:
-      - name: "tipo"
-        label: "Tipo de archivo"
-        widget: "select"
-        options: ["Imagen", "Video"]
-        default: "Imagen"
-      - name: "archivo"
-        label: "Archivo"
-        widget: "file"
-        media_library: 
-          allow_multiple: true  # Permite subir varios a la vez
-      - name: "descripcion"
-        label: "Descripción (para SEO)"
-        widget: "string"
-        required: false
-      - name: "orden"
-        label: "Orden (1-100)"
-        widget: "number"
-        default: 50
 
-  # Galería de Matronatación (misma estructura)
-  - name: "galeria_matronatacion"
+# Colección para imágenes generales (opcional)
+  - name: "imagenes_generales"
+    label: "Imágenes Generales"
+    folder: "imagenes"
+    create: true
+    fields:
+      - { name: "imagen", label: "Archivo", widget: "image" }
+
+  # Galería de Aquagym
+  - name: "aquagym"
+    label: "Aquagym - Galería"
+    folder: "imagenes/Aquagym"    # Ruta exacta
+    description: "Sube o gestiona imágenes/vídeos de Aquagym"
+    create: true
+    delete: true
+    fields:
+      - { name: "archivo", label: "Archivo", widget: "image", allow_multiple: false }
+      - { name: "descripcion", label: "Descripción (SEO)", widget: "string", required: false }
+
+  # Galería de Matronatación
+  - name: "matronatacion"
     label: "Matronatación - Galería"
     folder: "imagenes/matronatacion"
     create: true
     delete: true
-    editor:
-      preview: false
-    fields:  # Los mismos campos que Aquagym
-      - { name: "tipo", label: "Tipo", widget: "select", options: ["Imagen", "Video"], default: "Imagen" }
-      - { name: "archivo", label: "Archivo", widget: "file" }
-      - { name: "descripcion", label: "Descripción", widget: "string", required: false }
-      - { name: "orden", label: "Orden", widget: "number", default: 50 }
+    fields:
+      - { name: "archivo", label: "Archivo", widget: "image", allow_multiple: false }
+      - { name: "titulo", label: "Título (opcional)", widget: "string", required: false }
 
-  # Galería de Natación (misma estructura)
-  - name: "galeria_natacion"
+  # Galería de Natación
+  - name: "natacion"
     label: "Natación - Galería"
     folder: "imagenes/natacion"
     create: true
     delete: true
-    editor:
-      preview: false
-    fields:  # Los mismos campos que Aquagym
-      - { name: "tipo", label: "Tipo", widget: "select", options: ["Imagen", "Video"], default: "Imagen" }
-      - { name: "archivo", label: "Archivo", widget: "file" }
-      - { name: "descripcion", label: "Descripción", widget: "string", required: false }
-      - { name: "orden", label: "Orden", widget: "number", default: 50 }
+    fields:
+      - { name: "archivo", label: "Archivo", widget: "image", allow_multiple: true }
+      - { 
+          name: "tipo", 
+          label: "Tipo de contenido", 
+          widget: "select", 
+          options: ["Foto", "Video"], 
+          default: "Foto" 
+        }

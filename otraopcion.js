@@ -1,13 +1,17 @@
 
-  // ---------------- SMOOTH SCROLLING ----------------
+  // ---------------- SMOOTH SCROLLING (General - Modified by Manus) ----------------
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-        if (navLinks.classList.contains("active")) {
-          navLinks.classList.remove("active");
+      const targetSelector = this.getAttribute("href");
+      if (targetSelector && targetSelector.length > 1 && targetSelector.startsWith("#")) {
+        const target = document.querySelector(targetSelector);
+        if (target) {
+          const isNavLink = this.closest(".nav-links");
+          if (!isNavLink) { // Only preventDefault and scroll if NOT a nav-link (new logic handles nav-links)
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          // If it IS a nav-link, the new DOMContentLoaded logic will handle its scrolling and menu closing.
         }
       }
     });
@@ -459,38 +463,105 @@
     });
   }
   
-// REEMPLAZA TODO EL CÓDIGO DEL MENU TOGGLE CON ESTO:
-document.addEventListener("DOMContentLoaded", function() {
+ // --- START MANUS MODIFIED MENU LOGIC (Replaces original menu toggle code) ---
+ document.addEventListener("DOMContentLoaded", function() {
   const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
-  const dropdowns = document.querySelectorAll(".dropdown");
+  const navLinks = document.querySelector(".nav-links"); 
+  const dropdownLiElements = document.querySelectorAll("li.dropdown"); 
 
-  // Menú hamburguesa
   if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", function(e) {
-      e.stopPropagation(); // Evita que el evento se propague
-      navLinks.classList.toggle("active");
-      document.body.classList.toggle("menu-open"); // Para controlar el scroll
+    menuToggle.addEventListener("click", function(event) {
+      event.stopPropagation(); 
+      navLinks.classList.toggle("active"); 
+      document.body.classList.toggle("menu-open"); 
     });
   }
 
-  // Dropdowns
-  dropdowns.forEach(dropdown => {
-    const link = dropdown.querySelector("a");
+  dropdownLiElements.forEach(dropdownLi => { 
+    const mainDropdownLink = dropdownLi.querySelector("a"); 
     
-    link.addEventListener("click", function(e) {
-      if (window.innerWidth <= 768) { // Solo en móvil
-        e.preventDefault();
-        dropdown.classList.toggle("active");
+    if (mainDropdownLink && mainDropdownLink.parentElement === dropdownLi) {
+        mainDropdownLink.addEventListener("click", function(event) {
+            if (window.innerWidth <= 768) { 
+                if (dropdownLi.querySelector(".dropdown-menu")) { 
+                    event.preventDefault(); 
+                    dropdownLi.classList.toggle("active"); 
+                    dropdownLiElements.forEach(otherDropdownLi => {
+                        if (otherDropdownLi !== dropdownLi && otherDropdownLi.classList.contains("active")) {
+                            otherDropdownLi.classList.remove("active");
+                        }
+                    });
+                }
+            }
+        });
+    }
+  });
+
+  const allNavSiteLinks = document.querySelectorAll(".nav-links a"); 
+
+  allNavSiteLinks.forEach(navLink => {
+    navLink.addEventListener("click", function(event) {
+      const href = this.getAttribute("href");
+      const isInternalPageLink = href && href.startsWith("#") && href.length > 1;
+
+      if (isInternalPageLink) {
+        event.preventDefault(); 
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          const header = document.querySelector("header");
+          const headerOffset = header ? header.offsetHeight : 0;
+          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }
+
+      if (navLinks && navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        if (document.body.classList.contains("menu-open")) {
+            document.body.classList.remove("menu-open");
+        }
+      }
+
+      const parentDropdownLi = this.closest("li.dropdown");
+      if (parentDropdownLi && parentDropdownLi.classList.contains("active")) {
+         parentDropdownLi.classList.remove("active");
+      }
+      if (parentDropdownLi && window.innerWidth > 768) {
+          const mainLinkOfParent = parentDropdownLi.querySelector("a");
+          if (mainLinkOfParent && mainLinkOfParent.parentElement === parentDropdownLi) {
+              mainLinkOfParent.blur();
+          }
+          parentDropdownLi.classList.remove("active"); 
+      }
+      
+      if (window.innerWidth <= 768) {
+        dropdownLiElements.forEach(d => {
+            d.classList.remove("active");
+        });
       }
     });
   });
 
-  // Cerrar menú al hacer clic fuera
-  document.addEventListener("click", function(e) {
-    if (!e.target.closest(".nav-links") && !e.target.closest(".menu-toggle")) {
-      navLinks.classList.remove("active");
-      document.body.classList.remove("menu-open");
+  document.addEventListener("click", function(event) {
+    const isClickInsideNavContainer = navLinks && navLinks.contains(event.target);
+    const isClickOnToggle = menuToggle && menuToggle.contains(event.target);
+
+    if (!isClickInsideNavContainer && !isClickOnToggle) {
+      if (navLinks && navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        if (document.body.classList.contains("menu-open")) {
+            document.body.classList.remove("menu-open");
+        }
+      }
+      dropdownLiElements.forEach(dropdownLi => {
+        dropdownLi.classList.remove("active");
+      });
     }
   });
 });
+// --- END MANUS MODIFIED MENU LOGIC ---

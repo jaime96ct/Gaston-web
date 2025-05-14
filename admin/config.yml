@@ -169,11 +169,6 @@ collections:
             fields:
               - { name: "copyright", label: "Texto Copyright", widget: "string" }
               - { name: "instagram", label: "Usuario Instagram Footer", widget: "string" }
-
-# Configuración mejorada para galerías (añadir al config.yml existente)
-collections:
-  # ... (tus otras colecciones aquí)
-
   # Galería de Aquagym (imágenes + vídeos)
   - name: "galeria_aquagym"
     label: "Aquagym - Galería"

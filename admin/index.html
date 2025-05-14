@@ -1,39 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>Admin - Club Natación Aguadulce</title>
-    <!-- Carga CMS desde CDN -->
-    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
-    <!-- Estilos básicos para el panel -->
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        h1 {
-            text-align: center;
-            color: #50c7e7;
-            padding: 20px 0;
-            margin: 0;
-            font-family: 'Comic Neue', cursive;
-        }
-    </style>
+    <!-- Carga el CSS de Netlify CMS -->
+    <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.10.0/dist/cms.css" />
 </head>
 <body>
-    <!-- Encabezado personalizado -->
-    <h1>Panel de Administración <br> <small>Club Natación Aguadulce</small></h1>
+    <!-- Contenedor donde se inyectará el CMS -->
+    <div id="ncms-root"></div>
     
+    <!-- Scripts obligatorios -->
+    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+    
+    <!-- Personalización (opcional) -->
     <script>
-        // Inicialización del CMS con configuración adicional
+        CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
         CMS.init({
             config: {
-                // Personalización del logo (opcional)
-                logo_url: "https://tusitio.com/imagenes/Logo-solo.png",
-                locale: 'es' // Para español
+                site_url: window.location.origin, // URL de tu sitio
+                logo_url: "/imagenes/Logo-solo.png", // Ruta a tu logo
+                locale: "es"
             }
         });
     </script>

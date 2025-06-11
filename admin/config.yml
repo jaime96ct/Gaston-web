@@ -1,9 +1,9 @@
 backend:
   name: git-gateway
   branch: main
-media_folder: "imagenes"
-public_folder: "/imagenes"
-publish_mode: editorial_workflow
+  media_folder: "imagenes"
+  public_folder: "/imagenes"
+  publish_mode: editorial_workflow
 
 collections:
   - name: "pagina_principal"
@@ -13,12 +13,11 @@ collections:
     files:
       - name: "inicio"
         label: "Contenido Principal"
-        file: "../index.html"
-        frontmatter_delimiter: ["<!-- CMS-DATA -->", "<!-- /CMS-DATA -->"]
+        file: "./index.html"
+        frontmatter_delimiter: "<!-- CMS-DATA -->"
         fields:
-          # -------------------------------
           # 1. Hero Section
-          # -------------------------------
+          # ----------------------------------------------------------------------------------------------------
           - label: "Hero Banner"
             name: "hero"
             widget: "object"
@@ -27,254 +26,352 @@ collections:
               - { name: "titulo", label: "Título Principal", widget: "string", required: false }
               - { name: "texto_boton", label: "Texto Botón Principal", widget: "string", required: false }
               - { name: "texto_boton_whatsapp", label: "Texto Botón WhatsApp", widget: "string", required: false }
+              - { name: "imagen_hero", label: "Imagen del Banner Principal", widget: "image", required: false }
 
-          # -------------------------------
           # 2. Sobre Nosotros
-          # -------------------------------
-        
-  - name: "sobre"
-    label: "Sección Sobre Nosotros"
-    folder: "cms/sobre"
-    create: false
-    slug: "contenido"
-    fields:
-      - label: "Título de la sección"
-        name: "titulo_seccion"
-        widget: "string"
-        default: "Sobre nosotros"
+          # ----------------------------------------------------------------------------------------------------
+          - name: "sobre"
+            label: "Sección Sobre Nosotros"
+            folder: "cms/sobre"
+            create: false
+            slug: "contenido"
+            fields:
+              - label: "Título de la sección"
+                name: "titulo_seccion"
+                widget: "string"
+                default: "Sobre nosotros"
+              - label: "Imagen de la sección Sobre Nosotros"
+                name: "imagen_sobre_nosotros"
+                widget: "image"
+                required: false
+              - label: "Texto sobre la imagen"
+                name: "texto_imagen"
+                widget: "text"
+                default: "¡Te invito a sumarte a esta experiencia donde el agua se convierte en bienestar, salud y alegría!"
+              - label: "Texto principal - Nuestro Club"
+                name: "texto_principal"
+                widget: "markdown"
+              - label: "Título - Objetivos"
+                name: "titulo_objetivos"
+                widget: "string"
+                default: "Nuestros Objetivos"
+              - label: "Lista de Objetivos"
+                name: "lista_objetivos"
+                widget: "markdown"
+                default: |
+                  *   **Fomentar un estilo de vida saludable y activo**, promoviendo hábitos que mejoren el bienestar físico y emocional de nuestros alumnos.
+                  *   **Impulsar la práctica regular de actividad física** adaptada a todas las edades y capacidades.
+                  *   **Transmitir seguridad y confianza en el medio acuático** creando un entorno seguro, motivador y adaptado al ritmo de cada persona.
+                  *   **Ofrecer un trato cercano y personalizado** fortaleciendo la relación con nuestros alumnos y sus familias.
+                  *   **Enseñar desde la pasión y la experiencia,** compartiendo los conocimientos técnicos necesarios para disfrutar del deporte acuático con autonomía y seguridad
 
-      - label: "Texto sobre la imagen"
-        name: "texto_imagen"
-        widget: "text"
-        default: "¡Te invito a sumarte a esta experiencia donde el agua se convierte en bienestar, salud y alegría!"
+              - label: "Título - ¿Dónde Estamos?"
+                name: "titulo_estamos"
+                widget: "string"
+                default: "¿Dónde Estamos?"
+              - label: "Dirección"
+                name: "direccion"
+                widget: "string"
+                default: "Albergue Inturjoven Aguadulce en Verano y Hotel Playadulce el resto del año"
+              - label: "Horario"
+                name: "horario"
+                widget: "string"
+                default: "Consultar por Whatssap o E-mail"
+              - label: "Teléfono"
+                name: "telefono"
+                widget: "string"
+                default: "659 13 69 87"
+              - label: "Email"
+                name: "email"
+                widget: "string"
+                default: "natacion_aguadulce@outlook.es"
 
-      - label: "Texto principal - Nuestro Club"
-        name: "texto_principal"
-        widget: "markdown"
-
-      - label: "Título - Objetivos"
-        name: "titulo_objetivos"
-        widget: "string"
-        default: "Nuestros Objetivos"
-
-      - label: "Lista de Objetivos"
-        name: "lista_objetivos"
-        widget: "markdown"
-        default: |
-          - **Fomentar un estilo de vida saludable y activo**, promoviendo hábitos que mejoren el bienestar físico y emocional de nuestros alumnos.
-          - **Impulsar la práctica regular de actividad física** adaptada a todas las edades y capacidades.
-          - **Transmitir seguridad y confianza en el medio acuático** creando un entorno seguro, motivador y adaptado al ritmo de cada persona.
-          - **Ofrecer un trato cercano y personalizado** fortaleciendo la relación con nuestros alumnos y sus familias.
-          - **Enseñar desde la pasión y la experiencia**, compartiendo los conocimientos técnicos necesarios para disfrutar del deporte acuático con autonomía y seguridad.
-
-      - label: "Título - ¿Dónde estamos?"
-        name: "titulo_estamos"
-        widget: "string"
-        default: "¿Dónde Estamos?"
-
-      - label: "Lista de Ubicación"
-        name: "lista_estamos"
-        widget: "markdown"
-        default: |
-          - **Dirección:** Albergue Inturjoven Aguadulce en Verano y Hotel Playadulce el resto del año  
-          - **Horario:** Consultar por WhatsApp o E-mail  
-          - **Teléfono:** 659 13 69 87  
-          - **Email:** natacion_aguadulce@outlook.es
-
-
-
-          # -------------------------------
           # 3. Aquagym
-          # -------------------------------
-          - label: "Aquagym"
-            name: "aquagym"
-            widget: "object"
-            required: false
+          # ----------------------------------------------------------------------------------------------------
+          - name: "aquagym"
+            label: "Sección Aquagym"
+            folder: "cms/aquagym"
+            create: false
+            slug: "contenido"
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
-              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
-              - { name: "texto_fijo", label: "Texto Destacado", widget: "text", required: false }
-              
-              - label: "Beneficios"
-                name: "beneficios"
-                widget: "list"
-                required: false
-                field: { label: "Beneficio", name: "item", widget: "text", required: false }
-              
-              - label: "Horarios"
-                name: "horarios"
-                widget: "object"
-                required: false
-                fields:
-                  - { name: "verano", label: "Horario Verano", widget: "markdown", required: false }
-                  - { name: "invierno", label: "Horario Invierno", widget: "markdown", required: false }
+              - label: "Título - Aquagym"
+                name: "titulo_aquagym"
+                widget: "string"
+                default: "Aquagym"
+              - label: "Texto - Aquagym"
+                name: "texto_aquagym"
+                widget: "text"
+                default: "No necesitas saber nadar, ¡solo tener ganas de moverte, reír y sentirte mejor!"
+              - label: "Título - Descubre el Aquagym"
+                name: "titulo_descubre_aquagym"
+                widget: "string"
+                default: "¡Descubre el Aquagym!"
+              - label: "Texto - Descubre el Aquagym"
+                name: "texto_descubre_aquagym"
+                widget: "markdown"
+                default: |
+                  El **Aquagym** es una actividad física acuática que combina ejercicios de gimnasia, tonificación y movilidad realizados dentro del agua, especialmente diseñada para mejorar la salud, la forma física y el bienestar general.  
+                  Gracias a la resistencia natural del agua y su bajo impacto sobre las articulaciones, el Aquagym es ideal para personas de todas las edades y condiciones físicas, incluidas personas mayores, embarazadas o quienes se están recuperando de lesiones.
+              - label: "Título - Objetivos del Aquagym"
+                name: "titulo_objetivos_aquagym"
+                widget: "string"
+                default: "Objetivos del Aquagym"
+              - label: "Lista de Objetivos del Aquagym"
+                name: "lista_objetivos_aquagym"
+                widget: "markdown"
+                default: |
+                  *   Mejora la **condicion cardiovascular** y la **resistencia muscular.**
+                  *   Aumenta la **flexibilidad** y el **equilibrio**
+                  *   Favorece la **movilidad articular**
+                  *   Ayuda a reducir el **estrés** y mejora el estado de ánimo.
+                  *   Actividad **segura y divertida**, sin riesgo de impacto.
+              - label: "Título - Horarios de Aquagym"
+                name: "titulo_horarios_aquagym"
+                widget: "string"
+                default: "Horarios de Aquagym"
+              - label: "Horarios de Verano"
+                name: "horarios_verano_aquagym"
+                widget: "markdown"
+                default: |
+                  #### Horarios de Verano
+                  *   **Lunes, Miércoles y Viernes (3 días por semana)**  
+                      Mañanas: 9:20 – 10:10  
+                      Tardes: 19:40 – 20:30
+                  *   **Martes y Jueves (2 días por semana)**  
+                      Mañanas: 9:20 – 10:10
+              - label: "Horarios de Invierno"
+                name: "horarios_invierno_aquagym"
+                widget: "markdown"
+                default: |
+                  #### Horarios de Invierno (grupos reducidos)
+                  *   **Lunes, Miércoles y Viernes (3 días por semana)**  
+                      Mañanas: 9:00 – 9:50 // 10:00 – 10:50  
+                      Tardes: 19:10 – 20:00 // 20:10 – 21:00
+                  *   **Martes y Jueves (2 días por semana)**  
+                      Mañanas: 9:00 – 9:50 // 10:00 – 10:50  
+                      Tardes: 19:10 – 20:00 // 20:10 – 21:00
 
-          # -------------------------------
           # 4. Matronatación
-          # -------------------------------
-          - label: "Matronatación"
-            name: "matronatacion"
-            widget: "object"
-            required: false
+          # ----------------------------------------------------------------------------------------------------
+          - name: "matronatacion"
+            label: "Sección Matronatación"
+            folder: "cms/matronatacion"
+            create: false
+            slug: "contenido"
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
-              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
-              - { name: "texto_fijo", label: "Texto Destacado", widget: "text", required: false }
-              
-              - label: "Beneficios"
-                name: "beneficios"
-                widget: "list"
-                required: false
-                field: { label: "Beneficio", name: "item", widget: "text", required: false }
-              
-              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown", required: false }
+              - label: "Título - Matronatación"
+                name: "titulo_matronatacion"
+                widget: "string"
+                default: "Matronatación"
+              - label: "Texto - Matronatación"
+                name: "texto_matronatacion"
+                widget: "text"
+                default: "¡Esperamos ver a tu bebé disfrutar del agua con nosotros!"
+              - label: "Título - Descubre la Matronatación"
+                name: "titulo_descubre_matronatacion"
+                widget: "string"
+                default: "¡Descubre la Matronatación!"
+              - label: "Texto - Descubre la Matronatación"
+                name: "texto_descubre_matronatacion"
+                widget: "markdown"
+                default: |
+                  La **matronatación** es una actividad acuática dirigida a **bebés y niños pequeños**, acompañados por sus padres o cuidadores, que busca familiarizarlos con el medio acuático de forma segura, lúdica y afectiva.  
+                  No se trata de enseñar a nadar como tal, sino de **estimular el desarrollo psicomotor**, fortalecer el vínculo con los padres y favorecer la confianza y la adaptación al agua desde edades muy tempranas (a partir de los 6 meses hasta los 3 años).
+              - label: "Título - Beneficios de la Matronatación"
+                name: "titulo_beneficios_matronatacion"
+                widget: "string"
+                default: "Beneficios de la Matronatación"
+              - label: "Lista de Beneficios de la Matronatación"
+                name: "lista_beneficios_matronatacion"
+                widget: "markdown"
+                default: |
+                  *   Favorece al **desarrollo motor, sensorial y cognitivo del bebé.**
+                  *   Refuerza el **vínculo afectivo** entre bebé y adulto
+                  *   Mejora la **coordinación, el equilibrio y la autonomía**
+                  *   Estimula la **socialización temprana.**
+                  *   Introduce **hábitos** de seguridad en el agua
+              - label: "Título - Horarios de Matronatación"
+                name: "titulo_horarios_matronatacion"
+                widget: "string"
+                default: "Horarios de Matronatación"
+              - label: "Texto - Horarios de Matronatación"
+                name: "texto_horarios_matronatacion"
+                widget: "markdown"
+                default: |
+                  ### **¿Cómo reservar tu clase de Matronatación**
+                  1.  **Envíanos un mensaje o llama al 659 13 69 87** para consultar disponibilidad.
+                  2.  **Indica la edad de tu bebé o niño/a.**
+                  3.  **Te proporcionaremos** las opciones de horario y grupo más adecuadas.
 
-          # -------------------------------
-          # 5. Natación
-          # -------------------------------
-          - label: "Natación"
-            name: "natacion"
-            widget: "object"
-            required: false
+          # 5. Natación 2025
+          # ----------------------------------------------------------------------------------------------------
+          - name: "natacion_2025"
+            label: "Sección Natación 2025"
+            folder: "cms/natacion_2025"
+            create: false
+            slug: "contenido"
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
-              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
-              - { name: "texto_fijo", label: "Texto Destacado", widget: "text", required: false }
-              
-              - label: "Beneficios"
-                name: "beneficios"
-                widget: "list"
-                required: false
-                field: { label: "Beneficio", name: "item", widget: "text", required: false }
-              
-              - { name: "instrucciones_reserva", label: "Instrucciones Reserva", widget: "markdown", required: false }
+              - label: "Título - Natación 2025"
+                name: "titulo_natacion_2025"
+                widget: "string"
+                default: "Natación 2025"
+              - label: "Texto - Natación 2025"
+                name: "texto_natacion_2025"
+                widget: "text"
+                default: "¡Te esperamos para que disfrutes del agua y comiences a nadar con nosotros!"
+              - label: "Título - Descubre la Natación"
+                name: "titulo_descubre_natacion"
+                widget: "string"
+                default: "¡Descubre la Natación!"
+              - label: "Texto - Descubre la Natación"
+                name: "texto_descubre_natacion"
+                widget: "markdown"
+                default: |
+                  La natación es un deporte completo que ofrece múltiples beneficios para la salud física y mental. En nuestras clases, te ayudaremos a mejorar tu técnica, resistencia y confianza en el agua, adaptándonos a tu nivel y objetivos.
+              - label: "Título - Beneficios de la Natación"
+                name: "titulo_beneficios_natacion"
+                widget: "string"
+                default: "Beneficios de la Natación"
+              - label: "Lista de Beneficios de la Natación"
+                name: "lista_beneficios_natacion"
+                widget: "markdown"
+                default: |
+                  *   Mejora la **salud cardiovascular** y la **capacidad pulmonar.**
+                  *   Fortalece la **musculatura** de todo el cuerpo.
+                  *   Ayuda a **controlar el peso** y reduce el estrés.
+                  *   Desarrolla la **coordinación** y el **equilibrio.**
+                  *   Es un ejercicio de **bajo impacto** ideal para todas las edades.
+              - label: "Título - Horarios de Natación"
+                name: "titulo_horarios_natacion"
+                widget: "string"
+                default: "Horarios de Natación"
+              - label: "Horarios de Verano"
+                name: "horarios_verano_natacion"
+                widget: "markdown"
+                default: |
+                  #### Horarios de Verano
+                  *   **Lunes, Miércoles y Viernes (3 días por semana)**  
+                      Mañanas: 9:20 – 10:10  
+                      Tardes: 19:40 – 20:30
+                  *   **Martes y Jueves (2 días por semana)**  
+                      Mañanas: 9:20 – 10:10
+              - label: "Horarios de Invierno"
+                name: "horarios_invierno_natacion"
+                widget: "markdown"
+                default: |
+                  #### Horarios de Invierno (grupos reducidos)
+                  *   **Lunes, Miércoles y Viernes (3 días por semana)**  
+                      Mañanas: 9:00 – 9:50 // 10:00 – 10:50  
+                      Tardes: 19:10 – 20:00 // 20:10 – 21:00
+                  *   **Martes y Jueves (2 días por semana)**  
+                      Mañanas: 9:00 – 9:50 // 10:00 – 10:50  
+                      Tardes: 19:10 – 20:00 // 20:10 – 21:00
 
-          # -------------------------------
           # 6. Clases Privadas
-          # -------------------------------
-          - label: "Clases Privadas"
-            name: "clases_privadas"
-            widget: "object"
-            required: false
+          # ----------------------------------------------------------------------------------------------------
+          - name: "clases_privadas"
+            label: "Sección Clases Privadas"
+            folder: "cms/clases_privadas"
+            create: false
+            slug: "contenido"
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
-              - { name: "descripcion", label: "Descripción", widget: "markdown", required: false }
-              
-              - label: "Ventajas"
-                name: "ventajas"
-                widget: "list"
-                required: false
-                field: { label: "Ventaja", name: "item", widget: "string", required: false }
-              
-              - { name: "texto_boton", label: "Texto Botón Reserva", widget: "string", required: false }
+              - label: "Título - Clases Privadas"
+                name: "titulo_clases_privadas"
+                widget: "string"
+                default: "Clases Privadas"
+              - label: "Texto - Clases Privadas"
+                name: "texto_clases_privadas"
+                widget: "markdown"
+                default: |
+                  Ofrecemos clases privadas de natación adaptadas a tus necesidades y objetivos. Ya sea que busques mejorar tu técnica, superar un miedo al agua o prepararte para una competición, nuestras clases personalizadas te ayudarán a alcanzar tus metas de forma rápida y efectiva.
+              - label: "Título - Beneficios de las Clases Privadas"
+                name: "titulo_beneficios_clases_privadas"
+                widget: "string"
+                default: "Beneficios de las Clases Privadas"
+              - label: "Lista de Beneficios de las Clases Privadas"
+                name: "lista_beneficios_clases_privadas"
+                widget: "markdown"
+                default: |
+                  *   **Atención personalizada** y adaptada a tu ritmo de aprendizaje.
+                  *   **Flexibilidad de horarios** para ajustarse a tu disponibilidad.
+                  *   **Progreso más rápido** al enfocarse en tus necesidades específicas.
+                  *   **Superación de miedos** y mejora de la confianza en el agua.
+                  *   **Entrenamiento especializado** para objetivos concretos.
 
-          # -------------------------------
-          # 7. Galerías (nuevo)
-          # -------------------------------
-          - label: "Galerías"
-            name: "galerias"
-            widget: "object"
-            required: false
+          # 7. Galería
+          # ----------------------------------------------------------------------------------------------------
+          - name: "galeria"
+            label: "Sección Galería"
+            folder: "cms/galeria"
+            create: false
+            slug: "contenido"
             fields:
-              - label: "Aquagym"
-                name: "galeria_aquagym"
-                widget: "list"
-                required: false
-                field: { label: "Imagen/Video", name: "media", widget: "file", required: false }
-              
-              - label: "Matronatación"
-                name: "galeria_matronatacion"
-                widget: "list"
-                required: false
-                field: { label: "Imagen/Video", name: "media", widget: "file", required: false }
-              
-              - label: "Natación"
-                name: "galeria_natacion"
-                widget: "list"
-                required: false
-                field: { label: "Imagen/Video", name: "media", widget: "file", required: false }
+              - label: "Título - Galería"
+                name: "titulo_galeria"
+                widget: "string"
+                default: "Galería"
+              - label: "Texto - Galería"
+                name: "texto_galeria"
+                widget: "markdown"
+                default: |
+                  Explora nuestra galería de imágenes y videos para ver a nuestros alumnos en acción y conocer más sobre nuestras clases de natación, aquagym y matronatación.
 
-          # -------------------------------
-          # 8. Contacto
-          # -------------------------------
-          - label: "Contacto"
-            name: "contacto"
-            widget: "object"
-            required: false
+  - name: "galeria_media"
+    label: "Galería de Medios"
+    folder: "_site/imagenes/galeria_cms"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Tipo de Medio"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "Imagen", value: "image" }
+          - { label: "Video", value: "video" }
+        default: "image"
+      - label: "Archivo de Medio"
+        name: "media_file"
+        widget: "file"
+        allow_multiple: false
+        media_folder: "/imagenes/galeria_cms"
+        public_folder: "/imagenes/galeria_cms"
+      - label: "Título/Descripción (Opcional)"
+        name: "caption"
+        widget: "string"
+        required: false
+
+          # 8. Ubicación
+          # ----------------------------------------------------------------------------------------------------
+          - name: "ubicacion"
+            label: "Sección Ubicación"
+            folder: "cms/ubicacion"
+            create: false
+            slug: "contenido"
             fields:
-              - { name: "titulo_seccion", label: "Título Sección", widget: "string", required: false }
-              
-              - label: "Información de Contacto"
-                name: "info_contacto"
-                widget: "object"
-                required: false
-                fields:
-                  - { name: "telefono", label: "Teléfono", widget: "string", required: false }
-                  - { name: "email", label: "Email", widget: "string", required: false }
-                  - { name: "direccion_verano", label: "Dirección (Verano)", widget: "text", required: false }
-                  - { name: "direccion_invierno", label: "Dirección (Invierno)", widget: "text", required: false }
-                  - { name: "instagram", label: "Usuario Instagram", widget: "string", required: false }
-              
-              - label: "Formulario"
-                name: "formulario"
-                widget: "object"
-                required: false
-                fields:
-                  - { name: "email_destino", label: "Email Destino Formulario", widget: "string", required: false }
-                  - { name: "texto_boton", label: "Texto Botón Enviar", widget: "string", required: false }
+              - label: "Título - Ubicación"
+                name: "titulo_ubicacion"
+                widget: "string"
+                default: "Ubicación"
+              - label: "Texto - Ubicación"
+                name: "texto_ubicacion"
+                widget: "markdown"
+                default: |
+                  Encuéntranos en nuestras instalaciones de Aguadulce. Estamos convenientemente ubicados para ofrecerte las mejores clases de natación y actividades acuáticas.
 
-          # -------------------------------
-          # 9. Footer
-          # -------------------------------
-          - label: "Footer"
-            name: "footer"
-            widget: "object"
-            required: false
+          # 9. Contacto
+          # ----------------------------------------------------------------------------------------------------
+          - name: "contacto"
+            label: "Sección Contacto"
+            folder: "cms/contacto"
+            create: false
+            slug: "contenido"
             fields:
-              - { name: "copyright", label: "Texto Copyright", widget: "string", required: false }
-              - { name: "instagram", label: "Usuario Instagram Footer", widget: "string", required: false }
-
-# Colección para imágenes generales (opcional)
-  - name: "imagenes_generales"
-    label: "Imágenes Generales"
-    folder: "imagenes"
-    create: true
-    fields:
-      - { name: "imagen", label: "Archivo", widget: "image" }
-
-  # Galería de Aquagym
-  - name: "aquagym"
-    label: "Aquagym - Galería"
-    folder: "imagenes/Aquagym"    # Ruta exacta
-    description: "Sube o gestiona imágenes/vídeos de Aquagym"
-    create: true
-    delete: true
-    fields:
-      - { name: "archivo", label: "Archivo", widget: "image", allow_multiple: false }
-      - { name: "descripcion", label: "Descripción (SEO)", widget: "string", required: false }
-
-  # Galería de Matronatación
-  - name: "matronatacion"
-    label: "Matronatación - Galería"
-    folder: "imagenes/matronatacion"
-    create: true
-    delete: true
-    fields:
-      - { name: "archivo", label: "Archivo", widget: "image", allow_multiple: false }
-      - { name: "titulo", label: "Título (opcional)", widget: "string", required: false }
-
-  # Galería de Natación
-  - name: "natacion"
-    label: "Natación - Galería"
-    folder: "imagenes/natacion"
-    create: true
-    delete: true
-    fields:
-      - { name: "archivo", label: "Archivo", widget: "image", allow_multiple: true }
-      - { 
-          name: "tipo", 
-          label: "Tipo de contenido", 
-          widget: "select", 
-          options: ["Foto", "Video"], 
-          default: "Foto" 
-        }
+              - label: "Título - Contacto"
+                name: "titulo_contacto"
+                widget: "string"
+                default: "Contacto"
+              - label: "Texto - Contacto"
+                name: "texto_contacto"
+                widget: "markdown"
+                default: |
+                  ¿Tienes alguna pregunta o quieres reservar tu clase? Contáctanos a través de nuestro formulario, teléfono o WhatsApp. ¡Estaremos encantados de ayudarte!

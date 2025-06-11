@@ -3,26 +3,33 @@
 <head>
     <meta charset="utf-8">
     <title>Admin - Club Natación Aguadulce</title>
-    <!-- Carga el CSS de Netlify CMS -->
     <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.10.0/dist/cms.css" />
 </head>
 <body>
-    <!-- Contenedor donde se inyectará el CMS -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <div id="ncms-root"></div>
-    
-    <!-- Scripts obligatorios -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
     
-    <!-- Personalización (opcional) -->
     <script>
         CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
         CMS.init({
             config: {
-                site_url: window.location.origin, // URL de tu sitio
-                logo_url: "/imagenes/Logo-solo.png", // Ruta a tu logo
+                site_url: window.location.origin,
+                logo_url: "/imagenes/Logo-solo.png",
                 locale: "es"
             }
         });
+        
+        // Añade esto para manejar la autenticación de Netlify Identity
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>

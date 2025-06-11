@@ -504,6 +504,7 @@ nav {
 }
 .aquagym-image img {
   position: absolute;
+  object-fit:cover;
   top: 0;
   left: 0;
   width: 550px;
